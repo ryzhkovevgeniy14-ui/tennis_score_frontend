@@ -112,19 +112,19 @@ async function getPlayers() {
       myMatchesBtn.style.background = "#00c2ff";
       myMatchesBtn.style.color = "#000";
       myMatchesBtn.onclick = () => showPlayerMatches(p.name);
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "🗑 Удалить игрока";
-      deleteBtn.style.background = "orange";
-      deleteBtn.style.color = "#000";
-      deleteBtn.onclick = async () => {
-        const success = await deletePlayer(p.id);
-        if (success) {
-          showToast("Игрок удалён", "success");
-          await getPlayers();
-        }
-      };
+      // const deleteBtn = document.createElement("button");
+      // deleteBtn.textContent = "🗑 Удалить игрока";
+      // deleteBtn.style.background = "orange";
+      // deleteBtn.style.color = "#000";
+      // deleteBtn.onclick = async () => {
+      //  const success = await deletePlayer(p.id);
+      //  if (success) {
+      //    showToast("Игрок удалён", "success");
+      //    await getPlayers();
+      //  }
+      //};
       right.appendChild(myMatchesBtn);
-      right.appendChild(deleteBtn);
+      //right.appendChild(deleteBtn);
       card.appendChild(left);
       card.appendChild(right);
       container.appendChild(card);
@@ -221,19 +221,19 @@ async function getMatches(showNotification = true) {
     data.forEach(m => {
       const wrapper = document.createElement("div");
       wrapper.appendChild(renderMatch(m, false));
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "🗑 Удалить матч";
-      delBtn.style.background = "orange";
-      delBtn.style.color = "#000";
-      delBtn.style.marginTop = "8px";
-      delBtn.onclick = async () => {
-        const success = await deleteMatch(m.match_id);
-        if (success) {
-          showToast("Матч удалён", "success");
-          await getMatches(false);
-        }
-      };
-      wrapper.appendChild(delBtn);
+      //const delBtn = document.createElement("button");
+      //delBtn.textContent = "🗑 Удалить матч";
+      //delBtn.style.background = "orange";
+      //delBtn.style.color = "#000";
+      //delBtn.style.marginTop = "8px";
+      //delBtn.onclick = async () => {
+      //  const success = await deleteMatch(m.match_id);
+      //  if (success) {
+      //    showToast("Матч удалён", "success");
+      //    await getMatches(false);
+      //  }
+      //};
+      //wrapper.appendChild(delBtn);
       container.appendChild(wrapper);
     });
     if (showNotification) showToast("Матчи загружены", "success");
