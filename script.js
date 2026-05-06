@@ -652,7 +652,7 @@ async function showRating() {
     info.style.borderRadius = "8px";
     info.style.fontSize = "14px";
     info.style.color = "var(--muted)";
-    info.innerHTML = "ℹ️ 10 очков за выигранный гейм · 100 очков за выигранный сет";
+    info.innerHTML = "ℹ️ 10 очков за гейм<br>ℹ️ 100 очков за сет";
     container.appendChild(info);
 
     if (data.length === 0) {
