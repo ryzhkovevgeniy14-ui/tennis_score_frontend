@@ -102,7 +102,7 @@ async function getPlayers() {
       card.style.alignItems = "center";
       card.style.gap = "10px";
       const left = document.createElement("div");
-      left.textContent = `${p.id}. ${p.name}`;
+      left.textContent = `${p.name} 🎾`;
       left.style.fontWeight = "500";
       const right = document.createElement("div");
       right.style.display = "flex";
