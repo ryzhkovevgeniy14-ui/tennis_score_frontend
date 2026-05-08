@@ -408,3 +408,12 @@ button:active {
     flex: none;
   }
 }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+#preloader div:first-child {
+  animation: bounce 1s infinite;
+}
