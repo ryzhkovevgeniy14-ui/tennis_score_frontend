@@ -1,7 +1,7 @@
 /* ============================================================
    КОНФИГУРАЦИЯ И ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
    ============================================================ */
-const API = "https://tennis-score-backend.onrender.com/";
+const API = "https://tennis-score-backend.onrender.com";
 let activeMatchId = null;
 
 
