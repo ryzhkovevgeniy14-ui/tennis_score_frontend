@@ -349,35 +349,23 @@ function renderMatch(m, showControls) {
   title.textContent = `Матч №${m.id}`;
   card.appendChild(title);
 
-  // Создаём контейнер для всей таблицы с горизонтальной прокруткой
-  const tableContainer = document.createElement("div");
-  tableContainer.style.overflowX = "auto";
-  tableContainer.style.marginTop = "8px";
-
-  // Создаём внутреннюю таблицу
-  const scoreTable = document.createElement("div");
-  scoreTable.style.display = "inline-block";
-  scoreTable.style.minWidth = "100%";
-
-  // Добавляем строки в таблицу
-  scoreTable.appendChild(createScoreRow(
+  // Строка счёта для игрока 1
+  card.appendChild(createScoreRow(
     p1,
-    setsCount[0],
-    p1Sets,
-    currentGame[p1] ?? 0,
-    server === p1
+    setsCount[0],           // текущий счёт по сетам
+    p1Sets,                 // история сетов
+    currentGame[p1] ?? 0,   // текущий гейм
+    server === p1           // подаёт ли
   ));
 
-  scoreTable.appendChild(createScoreRow(
+  // Строка счёта для игрока 2
+  card.appendChild(createScoreRow(
     p2,
     setsCount[1],
     p2Sets,
     currentGame[p2] ?? 0,
     server === p2
   ));
-
-  tableContainer.appendChild(scoreTable);
-  card.appendChild(tableContainer);
 
   if (showControls) {
     const controls = document.createElement("div");
@@ -386,12 +374,12 @@ function renderMatch(m, showControls) {
     controls.style.gap = "8px";
     controls.style.marginTop = "10px";
 
-    // Первая строка: +1 для обоих
+    // Строка +1
     const plusRow = document.createElement("div");
     plusRow.style.display = "flex";
     plusRow.style.gap = "10px";
     plusRow.style.flexWrap = "wrap";
-    plusRow.className = "controls-row";
+    plusRow.style.justifyContent = "center";
 
     const btn1Plus = document.createElement("button");
     btn1Plus.textContent = `+1 ${p1}`;
@@ -404,12 +392,12 @@ function renderMatch(m, showControls) {
     plusRow.appendChild(btn1Plus);
     plusRow.appendChild(btn2Plus);
 
-    // Вторая строка: -1 для обоих и Закрыть
+    // Строка -1
     const minusRow = document.createElement("div");
     minusRow.style.display = "flex";
     minusRow.style.gap = "10px";
     minusRow.style.flexWrap = "wrap";
-    minusRow.className = "controls-row";
+    minusRow.style.justifyContent = "center";
 
     const btn1Minus = document.createElement("button");
     btn1Minus.textContent = `-1 ${p1}`;
@@ -421,6 +409,14 @@ function renderMatch(m, showControls) {
     btn2Minus.style.background = "orange";
     btn2Minus.onclick = () => addGame(m.id, p2, -1);
 
+    minusRow.appendChild(btn1Minus);
+    minusRow.appendChild(btn2Minus);
+
+    // Строка Закрыть
+    const closeRow = document.createElement("div");
+    closeRow.style.display = "flex";
+    closeRow.style.justifyContent = "center";
+
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "❌ Закрыть";
     closeBtn.style.background = "gray";
@@ -428,12 +424,11 @@ function renderMatch(m, showControls) {
       controls.style.display = "none";
     };
 
-    minusRow.appendChild(btn1Minus);
-    minusRow.appendChild(btn2Minus);
-    minusRow.appendChild(closeBtn);
+    closeRow.appendChild(closeBtn);
 
     controls.appendChild(plusRow);
     controls.appendChild(minusRow);
+    controls.appendChild(closeRow);
     card.appendChild(controls);
   }
 
