@@ -399,9 +399,11 @@ button:active {
   .score-buttons {
     flex-wrap: nowrap;
   }
+
   .score-buttons button {
     flex: none;
   }
+
   .score-buttons button:last-child {
     flex: none;
   }
