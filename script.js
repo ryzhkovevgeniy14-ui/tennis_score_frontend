@@ -374,7 +374,7 @@ function renderMatch(m, showControls) {
     controls.style.gap = "8px";
     controls.style.marginTop = "10px";
 
-    // Первая строка: +1
+    // Первая строка: +1 для обоих
     const plusRow = document.createElement("div");
     plusRow.style.display = "flex";
     plusRow.style.gap = "10px";
@@ -391,7 +391,7 @@ function renderMatch(m, showControls) {
     plusRow.appendChild(btn1Plus);
     plusRow.appendChild(btn2Plus);
 
-    // Вторая строка: -1 и Закрыть
+    // Вторая строка: -1 для обоих и Закрыть
     const minusRow = document.createElement("div");
     minusRow.style.display = "flex";
     minusRow.style.gap = "10px";
