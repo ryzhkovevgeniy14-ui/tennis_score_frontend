@@ -375,3 +375,34 @@ button:active {
     min-width: 80px;
   }
 }
+
+.score-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.score-buttons button {
+  flex: 1 1 calc(50% - 12px);
+  min-width: 140px;
+}
+
+/* Закрыть — отдельная строка на телефоне */
+.score-buttons button:last-child {
+  flex-basis: 100%;
+  max-width: none;
+}
+
+/* Горизонтальный телефон + компьютер */
+@media (min-width: 768px) {
+  .score-buttons {
+    flex-wrap: nowrap;
+  }
+  .score-buttons button {
+    flex: none;
+  }
+  .score-buttons button:last-child {
+    flex: none;
+  }
+}
