@@ -379,6 +379,7 @@ function renderMatch(m, showControls) {
     plusRow.style.display = "flex";
     plusRow.style.gap = "10px";
     plusRow.style.flexWrap = "wrap";
+    plusRow.className = "controls-row";
 
     const btn1Plus = document.createElement("button");
     btn1Plus.textContent = `+1 ${p1}`;
@@ -396,6 +397,7 @@ function renderMatch(m, showControls) {
     minusRow.style.display = "flex";
     minusRow.style.gap = "10px";
     minusRow.style.flexWrap = "wrap";
+    minusRow.className = "controls-row";
 
     const btn1Minus = document.createElement("button");
     btn1Minus.textContent = `-1 ${p1}`;
