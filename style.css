@@ -361,3 +361,17 @@ button:active {
   color: var(--accent2);
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .controls-row button {
+    flex: 1;
+    min-width: 80px;
+  }
+}
