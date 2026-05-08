@@ -727,3 +727,37 @@ window.onclick = function(event) {
     closeStatsModal();
   }
 }
+
+// === ПРОВЕРКА СЕРВЕРА И ПРЕЛОАДЕР ===
+async function checkServer() {
+  const maxAttempts = 30;
+  let attempts = 0;
+
+  while (attempts < maxAttempts) {
+    try {
+      const response = await fetch(`${API}/`);
+      if (response.ok) {
+        hidePreloader();
+        return;
+      }
+    } catch (e) {
+      console.log("Waiting for server...", attempts + 1);
+    }
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    attempts++;
+  }
+  document.getElementById("preloader").innerHTML = '<div style="text-align: center; padding: 20px;"><div style="font-size: 48px;">⚠️</div><div style="font-size: 18px; color: red;">Сервер недоступен<br>Попробуйте позже</div></div>';
+}
+
+function hidePreloader() {
+  const preloader = document.getElementById("preloader");
+  preloader.style.transition = "opacity 0.5s";
+  preloader.style.opacity = "0";
+  setTimeout(() => {
+    preloader.style.display = "none";
+  }, 500);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  checkServer();
+});
