@@ -349,23 +349,35 @@ function renderMatch(m, showControls) {
   title.textContent = `Матч №${m.id}`;
   card.appendChild(title);
 
-  // Строка счёта для игрока 1
-  card.appendChild(createScoreRow(
+  // Создаём контейнер для всей таблицы с горизонтальной прокруткой
+  const tableContainer = document.createElement("div");
+  tableContainer.style.overflowX = "auto";
+  tableContainer.style.marginTop = "8px";
+
+  // Создаём внутреннюю таблицу
+  const scoreTable = document.createElement("div");
+  scoreTable.style.display = "inline-block";
+  scoreTable.style.minWidth = "100%";
+
+  // Добавляем строки в таблицу
+  scoreTable.appendChild(createScoreRow(
     p1,
-    setsCount[0],           // текущий счёт по сетам
-    p1Sets,                 // история сетов
-    currentGame[p1] ?? 0,   // текущий гейм
-    server === p1           // подаёт ли
+    setsCount[0],
+    p1Sets,
+    currentGame[p1] ?? 0,
+    server === p1
   ));
 
-  // Строка счёта для игрока 2
-  card.appendChild(createScoreRow(
+  scoreTable.appendChild(createScoreRow(
     p2,
     setsCount[1],
     p2Sets,
     currentGame[p2] ?? 0,
     server === p2
   ));
+
+  tableContainer.appendChild(scoreTable);
+  card.appendChild(tableContainer);
 
   if (showControls) {
     const controls = document.createElement("div");
