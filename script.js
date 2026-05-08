@@ -216,7 +216,7 @@ async function createMatch() {
     await request(`${API}/matches/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ player_1_name: p1, player_2_name: p2 })
+      body: JSON.stringify({ player1_name: p1, player2_name: p2 })
     });
     showToast("Матч создан", "success");
     p1Input.value = "";
