@@ -68,22 +68,25 @@ async function request(url, options = {}) {
    ИГРОКИ
    ============================================================ */
 
-// Создать игрока
-async function createPlayer() {
-  const input = document.getElementById("playerName");
-  const name = input.value.trim();
-  if (!name) {
-    showToast("Введите имя игрока", "error");
+// Создать матч
+async function createMatch() {
+  const p1Input = document.getElementById("p1");
+  const p2Input = document.getElementById("p2");
+  const p1 = p1Input.value.trim();
+  const p2 = p2Input.value.trim();
+  if (!p1 || !p2) {
+    showToast("Введите обоих игроков", "error");
     return;
   }
   try {
-    await request(`${API}/players/`, {
+    await request(`${API}/matches/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ player1_name: p1, player2_name: p2 })
     });
-    showToast("Игрок создан", "success");
-    input.value = "";
+    showToast("Матч создан", "success");
+    p1Input.value = "";
+    p2Input.value = "";
   } catch (err) {}
 }
 
