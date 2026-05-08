@@ -369,18 +369,10 @@ function renderMatch(m, showControls) {
 
   if (showControls) {
     const controls = document.createElement("div");
-    controls.style.display = "flex";
-    controls.style.flexDirection = "column";
-    controls.style.gap = "8px";
+    controls.className = "score-buttons";
     controls.style.marginTop = "10px";
 
-    // Строка +1
-    const plusRow = document.createElement("div");
-    plusRow.style.display = "flex";
-    plusRow.style.gap = "10px";
-    plusRow.style.flexWrap = "wrap";
-    plusRow.style.justifyContent = "center";
-
+    // +1
     const btn1Plus = document.createElement("button");
     btn1Plus.textContent = `+1 ${p1}`;
     btn1Plus.onclick = () => addGame(m.id, p1, 1);
@@ -389,16 +381,7 @@ function renderMatch(m, showControls) {
     btn2Plus.textContent = `+1 ${p2}`;
     btn2Plus.onclick = () => addGame(m.id, p2, 1);
 
-    plusRow.appendChild(btn1Plus);
-    plusRow.appendChild(btn2Plus);
-
-    // Строка -1
-    const minusRow = document.createElement("div");
-    minusRow.style.display = "flex";
-    minusRow.style.gap = "10px";
-    minusRow.style.flexWrap = "wrap";
-    minusRow.style.justifyContent = "center";
-
+    // -1
     const btn1Minus = document.createElement("button");
     btn1Minus.textContent = `-1 ${p1}`;
     btn1Minus.style.background = "orange";
@@ -409,14 +392,7 @@ function renderMatch(m, showControls) {
     btn2Minus.style.background = "orange";
     btn2Minus.onclick = () => addGame(m.id, p2, -1);
 
-    minusRow.appendChild(btn1Minus);
-    minusRow.appendChild(btn2Minus);
-
-    // Строка Закрыть
-    const closeRow = document.createElement("div");
-    closeRow.style.display = "flex";
-    closeRow.style.justifyContent = "center";
-
+    // Закрыть
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "❌ Закрыть";
     closeBtn.style.background = "gray";
@@ -424,11 +400,11 @@ function renderMatch(m, showControls) {
       controls.style.display = "none";
     };
 
-    closeRow.appendChild(closeBtn);
-
-    controls.appendChild(plusRow);
-    controls.appendChild(minusRow);
-    controls.appendChild(closeRow);
+    controls.appendChild(btn1Plus);
+    controls.appendChild(btn2Plus);
+    controls.appendChild(btn1Minus);
+    controls.appendChild(btn2Minus);
+    controls.appendChild(closeBtn);
     card.appendChild(controls);
   }
 
