@@ -123,20 +123,20 @@ async function getPlayers() {
       myMatchesBtn.style.color = "#000";
       myMatchesBtn.onclick = () => showPlayerMatches(p.name);
 
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "🗑 Удалить игрока";
-      deleteBtn.style.background = "orange";
-      deleteBtn.style.color = "#000";
-      deleteBtn.onclick = async () => {
-        const success = await deletePlayer(p.id);
-        if (success) {
-          showToast("Игрок удалён", "success");
-          await getPlayers();
-        }
-      };
+      // const deleteBtn = document.createElement("button");
+      // deleteBtn.textContent = "🗑 Удалить игрока";
+      // deleteBtn.style.background = "orange";
+      // deleteBtn.style.color = "#000";
+      // deleteBtn.onclick = async () => {
+      // const success = await deletePlayer(p.id);
+      // if (success) {
+      //    showToast("Игрок удалён", "success");
+      //    await getPlayers();
+      //  }
+      //};
 
       right.appendChild(myMatchesBtn);
-      right.appendChild(deleteBtn);
+      //right.appendChild(deleteBtn);
 
       card.appendChild(left);
       card.appendChild(right);
@@ -234,19 +234,21 @@ async function getMatches(showNotification = true) {
     data.forEach(m => {
       const wrapper = document.createElement("div");
       wrapper.appendChild(renderMatch(m, false));
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "🗑 Удалить матч";
-      delBtn.style.background = "orange";
-      delBtn.style.color = "#000";
-      delBtn.style.marginTop = "8px";
-      delBtn.onclick = async () => {
-        const success = await deleteMatch(m.id);  // ← m.match_id → m.id
-        if (success) {
-          showToast("Матч удалён", "success");
-          await getMatches(false);
-        }
-      };
-      wrapper.appendChild(delBtn);
+
+      // const delBtn = document.createElement("button");
+      // delBtn.textContent = "🗑 Удалить матч";
+      // delBtn.style.background = "orange";
+      // delBtn.style.color = "#000";
+      // delBtn.style.marginTop = "8px";
+      // delBtn.onclick = async () => {
+      //   const success = await deleteMatch(m.id);
+      //   if (success) {
+      //     showToast("Матч удалён", "success");
+      //     await getMatches(false);
+      //   }
+      // };
+      // wrapper.appendChild(delBtn);
+
       container.appendChild(wrapper);
     });
     if (showNotification) showToast("Матчи загружены", "success");
@@ -344,7 +346,7 @@ function renderMatch(m, showControls) {
 
   const title = document.createElement("div");
   title.className = "title";
-  title.textContent = `Матч №${m.id}`;  // было match_id → id
+  title.textContent = `Матч №${m.id}`;
   card.appendChild(title);
 
   // Строка счёта для игрока 1
@@ -368,44 +370,56 @@ function renderMatch(m, showControls) {
   if (showControls) {
     const controls = document.createElement("div");
     controls.style.display = "flex";
-    controls.style.gap = "10px";
-    controls.style.flexWrap = "wrap";
+    controls.style.flexDirection = "column";
+    controls.style.gap = "8px";
     controls.style.marginTop = "10px";
 
-    const p1Group = document.createElement("div");
-    p1Group.style.display = "flex";
-    p1Group.style.gap = "5px";
+    // Первая строка: +1
+    const plusRow = document.createElement("div");
+    plusRow.style.display = "flex";
+    plusRow.style.gap = "10px";
+    plusRow.style.flexWrap = "wrap";
 
     const btn1Plus = document.createElement("button");
     btn1Plus.textContent = `+1 ${p1}`;
     btn1Plus.onclick = () => addGame(m.id, p1, 1);
+
+    const btn2Plus = document.createElement("button");
+    btn2Plus.textContent = `+1 ${p2}`;
+    btn2Plus.onclick = () => addGame(m.id, p2, 1);
+
+    plusRow.appendChild(btn1Plus);
+    plusRow.appendChild(btn2Plus);
+
+    // Вторая строка: -1 и Закрыть
+    const minusRow = document.createElement("div");
+    minusRow.style.display = "flex";
+    minusRow.style.gap = "10px";
+    minusRow.style.flexWrap = "wrap";
 
     const btn1Minus = document.createElement("button");
     btn1Minus.textContent = `-1 ${p1}`;
     btn1Minus.style.background = "orange";
     btn1Minus.onclick = () => addGame(m.id, p1, -1);
 
-    p1Group.appendChild(btn1Plus);
-    p1Group.appendChild(btn1Minus);
-
-    const p2Group = document.createElement("div");
-    p2Group.style.display = "flex";
-    p2Group.style.gap = "5px";
-
-    const btn2Plus = document.createElement("button");
-    btn2Plus.textContent = `+1 ${p2}`;
-    btn2Plus.onclick = () => addGame(m.id, p2, 1);
-
     const btn2Minus = document.createElement("button");
     btn2Minus.textContent = `-1 ${p2}`;
     btn2Minus.style.background = "orange";
     btn2Minus.onclick = () => addGame(m.id, p2, -1);
 
-    p2Group.appendChild(btn2Plus);
-    p2Group.appendChild(btn2Minus);
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "❌ Закрыть";
+    closeBtn.style.background = "gray";
+    closeBtn.onclick = () => {
+      controls.style.display = "none";
+    };
 
-    controls.appendChild(p1Group);
-    controls.appendChild(p2Group);
+    minusRow.appendChild(btn1Minus);
+    minusRow.appendChild(btn2Minus);
+    minusRow.appendChild(closeBtn);
+
+    controls.appendChild(plusRow);
+    controls.appendChild(minusRow);
     card.appendChild(controls);
   }
 
