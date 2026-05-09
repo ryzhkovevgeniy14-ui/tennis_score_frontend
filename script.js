@@ -704,7 +704,7 @@ async function showPlayerStats(playerId, playerName) {
         </div>
       </div>
       <div class="stat-row">
-        <span class="stat-label">🏆 Сеты:</span>
+        <span class="stat-label">🎲 Сеты:</span>
         <div>
           <span class="stat-value">${data.sets.won}</span>
           <span style="color: var(--muted);"> / </span>
