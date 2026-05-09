@@ -227,10 +227,14 @@ async function createMatch() {
 // Показать все матчи
 async function getMatches(showNotification = true) {
   try {
-    const data = await request(`${API}/matches/`);
+    let data = await request(`${API}/matches/`);
+    // Сортируем матчи по убыванию ID (новые сверху)
+    data.sort((a, b) => b.id - a.id);
+
     const container = document.getElementById("matches");
     container.innerHTML = "";
     addCloseButton(container, () => container.innerHTML = "");
+
     data.forEach(m => {
       const wrapper = document.createElement("div");
       wrapper.appendChild(renderMatch(m, false));
@@ -498,8 +502,10 @@ async function openMatchById(id) {
 
 async function showPlayerMatches(playerName) {
   try {
-    const matches = await request(`${API}/matches/`);
-    const playerMatches = matches.filter(m => m.player1_name === playerName || m.player2_name === playerName);
+    let matches = await request(`${API}/matches/`);
+    let playerMatches = matches.filter(m => m.player1_name === playerName || m.player2_name === playerName);
+    // Сортируем по убыванию ID
+    playerMatches.sort((a, b) => b.id - a.id);
     const block = document.getElementById("playerMatchesBlock");
     block.innerHTML = "";
     block.style.display = "block";
