@@ -229,7 +229,7 @@ async function getMatches(showNotification = true) {
   try {
     let data = await request(`${API}/matches/`);
     // Сортируем матчи по убыванию ID (новые сверху)
-    data.sort((a, b) => b.id - a.id);
+    data.sort((a, b) => a.id - b.id);
 
     const container = document.getElementById("matches");
     container.innerHTML = "";
@@ -505,7 +505,7 @@ async function showPlayerMatches(playerName) {
     let matches = await request(`${API}/matches/`);
     let playerMatches = matches.filter(m => m.player1_name === playerName || m.player2_name === playerName);
     // Сортируем по убыванию ID
-    playerMatches.sort((a, b) => b.id - a.id);
+    playerMatches.sort((a, b) => a.id - b.id);
     const block = document.getElementById("playerMatchesBlock");
     block.innerHTML = "";
     block.style.display = "block";
