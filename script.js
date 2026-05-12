@@ -714,7 +714,7 @@ async function showPlayerStats(playerId, playerName) {
       </div>
       <div class="stat-row">
         <span class="stat-label">🏆 Рейтинг:</span>
-        <span class="stat-value">${data.rank}</span>
+        <span class="stat-value">${data.rating}</span>
       </div>
       <div class="stat-row">
         <span class="stat-label">⭐ Очки:</span>
